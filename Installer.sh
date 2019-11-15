@@ -92,7 +92,7 @@ done
 
 mount $ROOT /mnt
 
-pacstrap /mnt base base-devel linux linux-firmware gnome gdm sudo grub
+pacstrap /mnt base base-devel linux linux-firmware gnome gdm vim sudo grub efibootmgr
 
 genfstab -U /mnt >> /mnt/etc/fstab
 

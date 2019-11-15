@@ -46,14 +46,14 @@ echo "....................................................."
 echo "Please uncomment the locale in the following editor... (Press enter to continue)"
 read null
 
-nano /etc/locale.gen
+vim /etc/locale.gen
 locale-gen
 
 echo "Please add the uncommented locale in the following editor... (Press enter to continue)"
 read null
 
 echo "LANG=" > /etc/locale.conf
-nano /etc/locale.conf
+vim /etc/locale.conf
 
 while [ true ]; do
   echo "....................................................."
@@ -98,9 +98,12 @@ done
 
 useradd -m -G wheel -s /bin/bash $USERNAME
 
+echo "Please set a password for $USERNAME..."
+passwd $USERNAME
+
 systemd enable gdm
 
-grub-install --target=i386-pc /dev/sda
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 
 echo "Everything should be done now... (press enter to continue)"
 read null
