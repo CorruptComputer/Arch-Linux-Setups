@@ -97,7 +97,7 @@ pacstrap /mnt base base-devel linux linux-firmware gnome gdm sudo grub
 genfstab -U /mnt >> /mnt/etc/fstab
 
 wget https://raw.githubusercontent.com/CorruptComputer/Arch-Linux-Setups/master/InstallerAfterChroot.sh
-cp InstallationAfterChroot.sh /mnt/InstallationAfterChroot.sh
+cp InstallerAfterChroot.sh /mnt/InstallerAfterChroot.sh
 
 echo "The initial install is done, we need to chroot now. When you get the prompt for the new shell run the InstallerAfterChroot.sh file... (press enter to continue)"
 read null
