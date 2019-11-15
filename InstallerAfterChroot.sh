@@ -101,7 +101,7 @@ useradd -m -G wheel -s /bin/bash $USERNAME
 echo "Please set a password for $USERNAME..."
 passwd $USERNAME
 
-systemd enable gdm
+systemctl enable gdm
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 
