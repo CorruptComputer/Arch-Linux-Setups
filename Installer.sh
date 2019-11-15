@@ -64,11 +64,12 @@ while [ true ]; do
   read answer
 
   if [[ -n "$answer" ]]; then
-    echo "Please enter SOMETHING."
+    echo "Please enter a partition."
     continue
   else
     mkfs.ext4 $answer
     ROOT=$answer
+    break
   fi
 done
 
