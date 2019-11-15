@@ -92,6 +92,18 @@ done
 
 mount $ROOT /mnt
 
-pacstrap /mnt base base-devel linux linux-firmware gnome gdm
+pacstrap /mnt base base-devel linux linux-firmware gnome gdm sudo grub
 
 genfstab -U /mnt >> /mnt/etc/fstab
+
+wget https://raw.githubusercontent.com/CorruptComputer/Arch-Linux-Setups/master/InstallerAfterChroot.sh
+cp InstallationAfterChroot.sh /mnt/InstallationAfterChroot.sh
+
+echo "The initial install is done, we need to chroot now. When you get the prompt for the new shell run the InstallerAfterChroot.sh file... (press enter to continue)"
+read null
+
+arch-chroot /mnt
+
+echo "Press enter to reboot..."
+read null
+reboot
