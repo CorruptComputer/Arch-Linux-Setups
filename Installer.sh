@@ -64,12 +64,13 @@ while [ true ]; do
   read answer
 
   if [[ -n "$answer" ]]; then
-    echo "Please enter a partition."
-    continue
-  else
     mkfs.ext4 $answer
     ROOT=$answer
     break
+  else
+    echo "Please enter a partition."
+    continue
+    
   fi
 done
 
@@ -80,11 +81,12 @@ while [ true ]; do
   read answer
 
   if [[ -n "$answer" ]]; then
-    echo "Please enter SOMETHING."
-    continue
-  else
     mkswap $answer
     swapon $answer
+    break
+  else
+    echo "Please enter a partition."
+    continue
   fi
 done
 
