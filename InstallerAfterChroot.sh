@@ -103,7 +103,29 @@ passwd $USERNAME
 
 systemctl enable gdm
 
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+mkdir /efi
+ln -sf /efi /boot
+
+EFI=""
+
+echo "....................................................."
+echo ""
+while [ true ]; do
+  echo "Where is the EFI System partition? "
+  read answer
+
+  if [[ -n "$answer" ]]; then
+    EFI=$answer
+    break
+  else
+    echo "Please enter a partition."
+    continue
+  fi
+done
+
+mount --bind $EFI /boot
+
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 
 echo "Everything should be done now... (press enter to continue)"
 read null

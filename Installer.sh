@@ -52,11 +52,29 @@ else
 fi
 
 echo "Please partition the disk..."
+echo "Make 3 partitions: 1 primary +1G, EFI System; 2 primary -8G, Linux Filesystem; 3 primary, Linux Swap."
 echo "....................................................."
 fdisk $DISK
 echo "....................................................."
 echo "Here is the partition table for $DISK..."
 fdisk -l $DISK
+
+echo "....................................................."
+echo ""
+while [ true ]; do
+  echo "Where do you want the EFI System? "
+  read answer
+
+  if [[ -n "$answer" ]]; then
+    mkfs.fat -F32 $answer
+    break
+  else
+    echo "Please enter a partition."
+    continue
+    
+  fi
+done
+
 echo "....................................................."
 echo ""
 while [ true ]; do
@@ -92,7 +110,7 @@ done
 
 mount $ROOT /mnt
 
-pacstrap /mnt base base-devel linux linux-firmware gnome gdm vim sudo grub efibootmgr
+pacstrap /mnt base base-devel linux linux-firmware gnome gdm vim sudo grub efibootmgr dosfstools
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
